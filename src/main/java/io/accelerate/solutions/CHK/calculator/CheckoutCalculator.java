@@ -27,7 +27,17 @@ public class CheckoutCalculator {
             MultiItemOffer.of(ItemType.A, 5, 200),
             MultiItemOffer.of(ItemType.B, 2, 45),
             MultiItemOffer.of(Map.of(ItemType.E, 2L), Map.of(ItemType.B, 1L), 0),
-            MultiItemOffer.of(ItemType.F, 3, 20)
+            MultiItemOffer.of(ItemType.F, 3, 20),
+            MultiItemOffer.of(ItemType.H, 5, 45),
+            MultiItemOffer.of(ItemType.H, 10, 80),
+            MultiItemOffer.of(ItemType.K, 2, 150),
+            MultiItemOffer.of(Map.of(ItemType.N, 3L), Map.of(ItemType.M, 1L), 0),
+            MultiItemOffer.of(ItemType.P, 5, 200),
+            MultiItemOffer.of(ItemType.Q, 3, 80),
+            MultiItemOffer.of(Map.of(ItemType.R, 3L), Map.of(ItemType.Q, 1L), 0),
+            MultiItemOffer.of(ItemType.U, 3, 80),
+            MultiItemOffer.of(ItemType.V, 2, 90),
+            MultiItemOffer.of(ItemType.V, 3, 130)
     ));
 
     static {
@@ -52,3 +62,4 @@ public class CheckoutCalculator {
         return totalPrice;
     }
 }
+

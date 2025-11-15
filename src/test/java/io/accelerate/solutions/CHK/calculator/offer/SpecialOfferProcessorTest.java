@@ -21,15 +21,15 @@ public class SpecialOfferProcessorTest {
     @Test
     public void shouldProcessItemsInBasket() {
         Map<ItemType, Long> itemsInBasket = Map.of(
-                ItemType.A, 4L,
+                ItemType.A, 7L,
                 ItemType.B, 2L,
                 ItemType.C, 5L
         );
-        SpecialOffer specialOffer = SpecialOffer.builder().itemType(ItemType.A).targetAmount(3).totalBundlePrice(130).build();
+        SpecialOffer specialOffer = SpecialOffer.of(ItemType.A, 3, 130);
 
         SpecialOfferResult result = processor.process(specialOffer, itemsInBasket);
 
-        assertEquals(result.getItemsProcessed(), Map.of(ItemType.A, 3L));
+        assertEquals(result.getItemsProcessed(), Map.of(ItemType.A, 6L));
         assertEquals(result.getTotalPriceApplied(), 130);
     }
 }

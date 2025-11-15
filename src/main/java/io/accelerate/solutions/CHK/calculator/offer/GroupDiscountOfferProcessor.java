@@ -42,11 +42,7 @@ public class GroupDiscountOfferProcessor implements OfferProcessor {
         for (ItemType itemType : itemGroup.getItemsInGroup()) {
             Long amountOfCurrentType = basket.getItems().get(itemType);
             if (amountOfCurrentType != null && amountOfCurrentType > 0) {
-                long processedAmount = LongStream.of(
-                        itemGroup.getTargetAmount() - amountOfCurrentType,
-                        itemGroup.getTargetAmount() - count,
-                        amountOfCurrentType
-                ).min().orElse(0);
+                long processedAmount = Math.min(itemGroup.getTargetAmount() - count, amountOfCurrentType);
                 count += processedAmount;
                 itemsRemoved.put(itemType,processedAmount);
                 basket.remove(Map.of(itemType, processedAmount));
@@ -59,6 +55,7 @@ public class GroupDiscountOfferProcessor implements OfferProcessor {
         return itemsRemoved;
     }
 }
+
 
 
 

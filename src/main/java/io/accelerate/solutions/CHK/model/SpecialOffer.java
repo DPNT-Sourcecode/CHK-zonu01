@@ -11,11 +11,13 @@ public class SpecialOffer {
     private int targetAmount;
     private int totalBundlePrice;
 
-    @Builder.
     private final int appliedDiscount;
 
     private SpecialOffer(ItemType itemType, int targetAmount, int totalBundlePrice) {
+        this.itemType = itemType;
+        this.targetAmount = targetAmount;
+        this.totalBundlePrice = totalBundlePrice;
 
+        appliedDiscount = targetAmount * itemType.getBasePrice() - totalBundlePrice;
     }
 }
-

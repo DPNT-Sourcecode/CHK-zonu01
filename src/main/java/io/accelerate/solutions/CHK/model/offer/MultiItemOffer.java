@@ -14,6 +14,16 @@ public class MultiItemOffer implements SpecialOffer {
     private final Map<ItemType, Long> targetProducts;
     private OfferBundle offerBundle;
 
+    /**
+     * Simple offer
+     */
+    public static MultiItemOffer of(ItemType itemType, long targetAmount, int totalBundlePrice) {
+        return MultiItemOffer.of(Map.of(itemType, targetAmount), Map.of(itemType, targetAmount), totalBundlePrice);
+    }
+
+    /**
+     * Multi item offer
+     */
     public static MultiItemOffer of(Map<ItemType, Long> targetProducts, Map<ItemType, Long> bundleItems, int totalBundlePrice) {
         return new MultiItemOffer(targetProducts, new OfferBundle(bundleItems, totalBundlePrice));
     }
@@ -31,4 +41,5 @@ public class MultiItemOffer implements SpecialOffer {
         return originalPrice - offerBundle.totalPrice();
     }
 }
+
 

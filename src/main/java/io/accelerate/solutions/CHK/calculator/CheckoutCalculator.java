@@ -1,11 +1,11 @@
 package io.accelerate.solutions.CHK.calculator;
 
+import io.accelerate.solutions.CHK.calculator.offer.MultiItemOfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.OfferProcessor;
-import io.accelerate.solutions.CHK.calculator.offer.SimpleOfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferResult;
 import io.accelerate.solutions.CHK.model.Basket;
 import io.accelerate.solutions.CHK.model.ItemType;
-import io.accelerate.solutions.CHK.model.offer.SimpleOffer;
+import io.accelerate.solutions.CHK.model.offer.MultiItemOffer;
 import io.accelerate.solutions.CHK.model.offer.SpecialOffer;
 import lombok.AllArgsConstructor;
 
@@ -16,16 +16,16 @@ public class CheckoutCalculator {
 
     private Map<String, OfferProcessor> processorMap;
 
-    public CheckoutCalculator(SimpleOfferProcessor simpleOfferProcessor) {
+    public CheckoutCalculator(MultiItemOfferProcessor multiItemOfferProcessor) {
         processorMap = Map.of(
-                SimpleOffer.class.getSimpleName(), simpleOfferProcessor
+                MultiItemOffer.class.getSimpleName(), multiItemOfferProcessor
         );
     }
 
     private static final List<SpecialOffer> specialOffers = new ArrayList<>(List.of(
-        SimpleOffer.of(ItemType.A, 3, 130),
-        SimpleOffer.of(ItemType.A, 5, 200),
-        SimpleOffer.of(ItemType.B, 2, 45)
+            MultiItemOffer.of(ItemType.A, 3, 130),
+            MultiItemOffer.of(ItemType.A, 5, 200),
+            MultiItemOffer.of(ItemType.B, 2, 45)
     ));
 
     static {
@@ -49,11 +49,5 @@ public class CheckoutCalculator {
 
         return totalPrice;
     }
-
-    private void removeItemsFromBasket(Map<ItemType, Long> itemsInBasket, Map<ItemType, Long> itemsProcessed) {
-        itemsProcessed.forEach((itemType, processedAmount) -> {
-            itemsInBasket.put(itemType, itemsInBasket.get(itemType) - processedAmount);
-        });
-    }
-
 }
+

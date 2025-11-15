@@ -1,5 +1,6 @@
 package io.accelerate.solutions.CHK.calculator.offer;
 
+import io.accelerate.solutions.CHK.model.Basket;
 import io.accelerate.solutions.CHK.model.ItemType;
 import io.accelerate.solutions.CHK.model.offer.MultiItemOffer;
 import io.accelerate.solutions.CHK.model.offer.SpecialOffer;
@@ -26,9 +27,9 @@ class MultiItemOfferProcessorTest {
                 Map.of(ItemType.D, 1L),
                 10
         );
-        Map<ItemType, Long> itemsInBasket = Map.of(ItemType.C, 4L, ItemType.D, 3L);
+        Basket basket = Basket.fromSkus("CCCCDDD");
 
-        SpecialOfferResult result = processor.process(offer, itemsInBasket);
+        SpecialOfferResult result = processor.process(offer, basket);
 
         assertEquals(result.getItemsProcessed().size(), 1);
         assertEquals(result.getItemsProcessed().get(ItemType.D), 2L);

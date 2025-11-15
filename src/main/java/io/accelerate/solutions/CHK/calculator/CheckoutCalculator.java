@@ -33,17 +33,17 @@ public class CheckoutCalculator {
     }
 
     public Integer calculateTotalPrice(Basket basket) {
-        Map<ItemType, Long> itemsInBasket = new HashMap<>(basket.getItems());
+        Basket processingBasket = basket.mutableCopy();
         int totalPrice = 0;
 
         for (SpecialOffer offer : specialOffers) {
             String offerType = offer.getClass().getSimpleName();
-            SpecialOfferResult specialOfferResult = processorMap.get(offerType).process(offer, itemsInBasket);
-            removeItemsFromBasket(itemsInBasket, specialOfferResult.getItemsProcessed());
+            SpecialOfferResult specialOfferResult = processorMap.get(offerType).process(offer, processingBasket);
+            processingBasket.remove(specialOfferResult.getItemsProcessed());
             totalPrice += specialOfferResult.getTotalPriceApplied();
         }
 
-        for (Map.Entry<ItemType, Long> item : itemsInBasket.entrySet()) {
+        for (Map.Entry<ItemType, Long> item : processingBasket.getItems().entrySet()) {
             totalPrice += (int) (item.getKey().getBasePrice() * item.getValue());
         }
 

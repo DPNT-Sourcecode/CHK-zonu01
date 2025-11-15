@@ -36,6 +36,16 @@ public class Basket {
         return new Basket(new HashMap<>(items));
     }
 
+    public boolean contains(Map<ItemType, Long> itemsToCheck) {
+        for (Map.Entry<ItemType, Long> itemToCheck : itemsToCheck.entrySet()) {
+            Long existingAmount = this.items.get(itemToCheck.getKey());
+            if (existingAmount == null || existingAmount < itemToCheck.getValue()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void put(Map<ItemType, Long> itemsToAdd) {
         for (Map.Entry<ItemType, Long> itemToAdd : itemsToAdd.entrySet()) {
             this.items.merge(itemToAdd.getKey(), itemToAdd.getValue(), Long::sum);

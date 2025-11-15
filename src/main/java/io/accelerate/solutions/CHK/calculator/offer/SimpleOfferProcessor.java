@@ -1,5 +1,6 @@
 package io.accelerate.solutions.CHK.calculator.offer;
 
+import io.accelerate.solutions.CHK.model.Basket;
 import io.accelerate.solutions.CHK.model.ItemType;
 import io.accelerate.solutions.CHK.model.offer.SimpleOffer;
 import io.accelerate.solutions.CHK.model.offer.SpecialOffer;
@@ -9,17 +10,16 @@ import java.util.Map;
 
 public class SimpleOfferProcessor implements OfferProcessor {
 
-    public SpecialOfferResult process(SpecialOffer specialOffer, Map<ItemType, Long> itemsInBasket) {
+    public SpecialOfferResult process(SpecialOffer specialOffer, Basket basket) {
 
         SimpleOffer offer = (SimpleOffer) specialOffer;
 
-        Map<ItemType, Long> itemsLeftInBasket = new HashMap<>(itemsInBasket);
+        Basket basketToProcess = basket.mutableCopy();
         Map<ItemType, Long> itemsProcessedForOffers = new HashMap<>();
         int totalPriceOfOffers = 0;
 
-        while (basketContainsItemsForOffer(itemsLeftInBasket, offer)) {
+        while (removeItemsApplicableForOffer(basketToProcess, offer)) {
             totalPriceOfOffers += offer.getTotalBundlePrice();
-            removeItemsFromBasket(offer, itemsLeftInBasket);
 
             Long currentItemProcessed = itemsProcessedForOffers.computeIfAbsent(offer.getItemType(), k -> 0L);
             itemsProcessedForOffers.put(offer.getItemType(), currentItemProcessed + offer.getTargetAmount());
@@ -31,12 +31,9 @@ public class SimpleOfferProcessor implements OfferProcessor {
                 .build();
     }
 
-    private void removeItemsFromBasket(SimpleOffer offer, Map<ItemType, Long> itemsLeftInBasket) {
-        itemsLeftInBasket.put(offer.getItemType(), itemsLeftInBasket.get(offer.getItemType()) - offer.getTargetAmount());
-    }
-
-    private boolean basketContainsItemsForOffer(Map<ItemType, Long> itemsInBasket, SimpleOffer offer) {
-        Long actualAmount = itemsInBasket.get(offer.getItemType());
-        return actualAmount != null && actualAmount >= offer.getTargetAmount();
+    private boolean removeItemsApplicableForOffer(Basket basket, SimpleOffer offer) {
+//        Long actualAmount = itemsInBasket.get(offer.getItemType());
+//        return actualAmount != null && actualAmount >= offer.getTargetAmount();
+        return false;
     }
 }

@@ -1,9 +1,6 @@
 package io.accelerate.solutions.CHK.model;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +12,7 @@ import static java.util.stream.Collectors.groupingBy;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @ToString
+@EqualsAndHashCode
 public class Basket {
 
     private Map<ItemType, Long> items;

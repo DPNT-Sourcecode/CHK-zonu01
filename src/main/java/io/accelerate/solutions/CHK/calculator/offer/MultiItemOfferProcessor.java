@@ -21,5 +21,6 @@ public class MultiItemOfferProcessor implements OfferProcessor {
     private boolean basketContainsItemsForOffer(Map<ItemType, Long> itemsInBasket, Map<ItemType, Long> targetItems) {
 //        Long actualAmount = itemsInBasket.get(offer.getItemType());
 //        return actualAmount != null && actualAmount >= offer.getTargetAmount();
+        return false;
     }
 }

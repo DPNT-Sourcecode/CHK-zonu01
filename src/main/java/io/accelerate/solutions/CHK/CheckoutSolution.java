@@ -2,9 +2,10 @@ package io.accelerate.solutions.CHK;
 
 import io.accelerate.solutions.CHK.calculator.CheckoutCalculator;
 import io.accelerate.solutions.CHK.model.Basket;
+import lombok.AccessLevel;
+import lombok.Setter;
 
-import static java.util.stream.Collectors.groupingBy;
-
+@Setter(AccessLevel.PACKAGE)
 public class CheckoutSolution {
 
     private CheckoutCalculator checkoutCalculator;

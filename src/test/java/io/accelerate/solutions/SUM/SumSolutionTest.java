@@ -22,6 +22,7 @@ public class SumSolutionTest {
 
     @Test
     public void shouldThrowIllegalArgumentExceptionWhenArgsOutOfBounds() {
-
+        ;
     }
 }
+

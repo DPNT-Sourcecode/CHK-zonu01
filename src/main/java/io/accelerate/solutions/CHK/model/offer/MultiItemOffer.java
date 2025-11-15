@@ -12,23 +12,23 @@ import java.util.Map;
 public class MultiItemOffer implements SpecialOffer {
 
     private final Map<ItemType, Long> targetProducts;
-    private BundlePrice bundlePrice;
+    private OfferBundle offerBundle;
 
     public static MultiItemOffer of(Map<ItemType, Long> targetProducts, Map<ItemType, Long> bundleItems, int totalBundlePrice) {
-        return new MultiItemOffer(targetProducts, new BundlePrice(bundleItems, totalBundlePrice));
+        return new MultiItemOffer(targetProducts, new OfferBundle(bundleItems, totalBundlePrice));
     }
 
-    @Override
     public int getBundlePrice() {
-        return bundlePrice.totalPrice();
+        return offerBundle.totalPrice();
     }
 
     @Override
     public int getAppliedDiscount() {
-        int originalPrice = bundlePrice.itemsInBundle().entrySet()
+        int originalPrice = offerBundle.itemsInBundle().entrySet()
                 .stream()
                 .mapToInt(entry -> (int) (entry.getKey().getBasePrice() * entry.getValue()))
                 .sum();
-        return originalPrice - bundlePrice.totalPrice();
+        return originalPrice - offerBundle.totalPrice();
     }
 }
+

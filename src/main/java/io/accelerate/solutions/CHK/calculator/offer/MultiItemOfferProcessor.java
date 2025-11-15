@@ -16,7 +16,7 @@ public class MultiItemOfferProcessor implements OfferProcessor {
 
         while (basketToProcess.contains(multiItemOffer.getTargetProducts())) {
             basketToProcess.remove(multiItemOffer.getTargetProducts());
-            itemsProcessed.put(multiItemOffer.getTargetProducts());
+            itemsProcessed.put(multiItemOffer.getOfferBundle().itemsInBundle());
             totalPriceOfOffers += multiItemOffer.getBundlePrice();
         }
 
@@ -26,4 +26,5 @@ public class MultiItemOfferProcessor implements OfferProcessor {
                 .build();
     }
 }
+
 

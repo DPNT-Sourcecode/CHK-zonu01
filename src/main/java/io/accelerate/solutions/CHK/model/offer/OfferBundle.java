@@ -4,5 +4,5 @@ import io.accelerate.solutions.CHK.model.ItemType;
 
 import java.util.Map;
 
-public record BundlePrice(Map<ItemType, Long> itemsInBundle, int totalPrice) {
+public record OfferBundle(Map<ItemType, Long> itemsInBundle, int totalPrice) {
 }

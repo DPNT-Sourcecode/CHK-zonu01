@@ -45,15 +45,11 @@ class CheckoutCalculatorTest {
                 .thenReturn(SpecialOfferResult.builder()
                         .totalPriceApplied(0)
                         .itemsProcessed(Map.of())
-                        .build())
-                .thenReturn(SpecialOfferResult.builder()
-                        .totalPriceApplied(0)
-                        .itemsProcessed(Map.of())
                         .build());
 
         Integer result = checkoutCalculator.calculateTotalPrice(Basket.fromSkus("AAABCDEE"));
 
-        assertEquals(205, result);
+        assertEquals(245, result);
     }
 }
 

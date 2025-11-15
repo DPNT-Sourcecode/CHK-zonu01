@@ -19,11 +19,20 @@ public class Basket {
     private Map<ItemType, Long> items;
 
     public static Basket fromSkus(String skus) {
-        Map<ItemType, Long> basket = skus.chars()
+        if (skus == null || skus.isBlank()) {
+            return new Basket(Map.of());
+        }
+
+        Map<ItemType, Long> basketItems = skus.chars()
                 .mapToObj(charInt -> (char) charInt)
                 .map(String::valueOf)
                 .map(ItemType::fromSku)
                 .collect(groupingBy(Function.identity(), counting()));
-        return new Basket(basket);
+        return new Basket(basketItems);
+    }
+
+    public boolean includesInvalidItems() {
+        return items.get(ItemType.INVALID) != null;
     }
 }
+

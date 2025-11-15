@@ -3,7 +3,6 @@ package io.accelerate.solutions.CHK.calculator;
 import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferResult;
 import io.accelerate.solutions.CHK.model.Basket;
-import io.accelerate.solutions.CHK.model.ItemType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

@@ -32,6 +32,10 @@ public class Basket {
         return new Basket(basketItems);
     }
 
+    public static Basket empty() {
+        return new Basket(new HashMap<>());
+    }
+
     public Basket mutableCopy() {
         return new Basket(new HashMap<>(items));
     }
@@ -62,3 +66,4 @@ public class Basket {
         return items.get(ItemType.INVALID) != null;
     }
 }
+

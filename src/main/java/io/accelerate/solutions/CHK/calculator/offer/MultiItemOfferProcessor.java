@@ -1,12 +1,8 @@
 package io.accelerate.solutions.CHK.calculator.offer;
 
 import io.accelerate.solutions.CHK.model.Basket;
-import io.accelerate.solutions.CHK.model.ItemType;
 import io.accelerate.solutions.CHK.model.offer.MultiItemOffer;
 import io.accelerate.solutions.CHK.model.offer.SpecialOffer;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MultiItemOfferProcessor implements OfferProcessor {
 
@@ -15,19 +11,19 @@ public class MultiItemOfferProcessor implements OfferProcessor {
         MultiItemOffer multiItemOffer = (MultiItemOffer) offer;
 
         Basket basketToProcess = basket.mutableCopy();
-        Map<ItemType, Long> itemsProcessedForOffers = new HashMap<>();
+        Basket itemsProcessed = Basket.empty();
         int totalPriceOfOffers = 0;
 
+        while (basketToProcess.contains(multiItemOffer.getTargetProducts())) {
+            basketToProcess.remove(multiItemOffer.getTargetProducts());
+            itemsProcessed.put(multiItemOffer.getTargetProducts());
+            totalPriceOfOffers += multiItemOffer.getBundlePrice();
+        }
 
         return SpecialOfferResult.builder()
-                .itemsProcessed(itemsProcessedForOffers)
+                .itemsProcessed(itemsProcessed.getItems())
                 .totalPriceApplied(totalPriceOfOffers)
                 .build();
     }
-
-    private boolean removeItemsFromBasketToApplyOffer(Map<ItemType, Long> itemsInBasket, Map<ItemType, Long> targetItems) {
-//        Long actualAmount = itemsInBasket.get(offer.getItemType());
-//        return actualAmount != null && actualAmount >= offer.getTargetAmount();
-        return false;
-    }
 }
+

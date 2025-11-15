@@ -67,6 +67,6 @@ class CheckoutCalculatorTest {
 
         Integer result = checkoutCalculator.calculateTotalPrice(Basket.fromSkus("FFFFFF"));
 
-        assertEquals(245, result);
+        assertEquals(40, result);
     }
 }

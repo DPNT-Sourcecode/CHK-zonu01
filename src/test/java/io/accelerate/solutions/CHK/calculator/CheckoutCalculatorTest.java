@@ -22,7 +22,7 @@ class CheckoutCalculatorTest {
     private GroupDiscountOfferProcessor groupDiscountOfferProcessor;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         multiItemOfferProcessor = Mockito.mock(MultiItemOfferProcessor.class);
         groupDiscountOfferProcessor = Mockito.mock(GroupDiscountOfferProcessor.class);
         checkoutCalculator = new CheckoutCalculator(multiItemOfferProcessor, groupDiscountOfferProcessor);
@@ -33,10 +33,16 @@ class CheckoutCalculatorTest {
                 .totalPriceApplied(0)
                 .itemsProcessed(Map.of())
                 .build());
+        when(multiItemOfferProcessor.process(
+                any(), any()
+        )).thenReturn(SpecialOfferResult.builder()
+                .totalPriceApplied(0)
+                .itemsProcessed(Map.of())
+                .build());
     }
 
     @Test
-    void calculateTotalPriceWithOffers() {
+    public void calculateTotalPriceWithOffers() {
         when(multiItemOfferProcessor.process(
                 any(), any()
         )).thenReturn(SpecialOfferResult.builder()
@@ -62,7 +68,7 @@ class CheckoutCalculatorTest {
     }
 
     @Test
-    void calculateTotalPriceWithoutOffers() {
+    public void calculateTotalPriceWithSelfProductOffer() {
         when(multiItemOfferProcessor.process(
                 any(), any()
         )).thenReturn(SpecialOfferResult.builder()
@@ -78,4 +84,19 @@ class CheckoutCalculatorTest {
 
         assertEquals(40, result);
     }
+
+    @Test
+    public void calculateTotalPriceWithGroupDiscountOffer() {
+        when(groupDiscountOfferProcessor.process(
+                any(), any()
+        )).thenReturn(SpecialOfferResult.builder()
+                        .totalPriceApplied(90)
+                        .itemsProcessed(Map.of(ItemType.S, 2L, ItemType.T, 2L, ItemType.X, 2L))
+                        .build());
+
+        Integer result = checkoutCalculator.calculateTotalPrice(Basket.fromSkus("STXSTX"));
+
+        assertEquals(90, result);
+    }
+
 }

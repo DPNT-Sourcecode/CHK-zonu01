@@ -42,7 +42,7 @@ public class CheckoutCalculator {
             MultiItemOffer.of(ItemType.U, 4, 120),
             MultiItemOffer.of(ItemType.V, 2, 90),
             MultiItemOffer.of(ItemType.V, 3, 130),
-            GroupDiscountOffer.of(ItemGroup.of(Any.of(S, T, X, Y, Z), 5), 45)
+            GroupDiscountOffer.of(ItemGroup.of(Any.of(S, T, X, Y, Z), 3), 45)
     ));
 
     static {

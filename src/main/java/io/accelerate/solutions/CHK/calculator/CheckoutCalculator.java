@@ -1,5 +1,6 @@
 package io.accelerate.solutions.CHK.calculator;
 
+import io.accelerate.solutions.CHK.calculator.offer.OfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.SimpleOfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferResult;
 import io.accelerate.solutions.CHK.model.Basket;
@@ -13,8 +14,13 @@ import java.util.*;
 @AllArgsConstructor
 public class CheckoutCalculator {
 
-    private Map<Class, >
-    private SimpleOfferProcessor simpleOfferProcessor;
+    private Map<String, OfferProcessor> processorMap;
+
+    public CheckoutCalculator(SimpleOfferProcessor simpleOfferProcessor) {
+        processorMap = Map.of(
+                SimpleOffer.class.getSimpleName(), simpleOfferProcessor
+        );
+    }
 
     private static final List<SpecialOffer> specialOffers = new ArrayList<>(List.of(
         SimpleOffer.of(ItemType.A, 3, 130),
@@ -31,7 +37,8 @@ public class CheckoutCalculator {
         int totalPrice = 0;
 
         for (SpecialOffer offer : specialOffers) {
-            SpecialOfferResult specialOfferResult = simpleOfferProcessor.process(offer, itemsInBasket);
+            String offerType = offer.getClass().getSimpleName();
+            SpecialOfferResult specialOfferResult = processorMap.get(offerType).process(offer, itemsInBasket);
             removeItemsFromBasket(itemsInBasket, specialOfferResult.getItemsProcessed());
             totalPrice += specialOfferResult.getTotalPriceApplied();
         }
@@ -50,3 +57,4 @@ public class CheckoutCalculator {
     }
 
 }
+

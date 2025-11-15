@@ -22,7 +22,8 @@ public class GroupDiscountOfferProcessor implements OfferProcessor {
 
         // check if basket contains the target amount of group items
         while (basketToProcess.contains(groupDiscountOffer.getItemGroup())) {
-            itemsProcessed.put(removeItemGroupFromBasket(basketToProcess, groupDiscountOffer.getItemGroup()));
+            Map<ItemType, Long> itemsRemoved = removeItemGroupFromBasket(basketToProcess, groupDiscountOffer.getItemGroup());
+            itemsProcessed.put(itemsRemoved);
             totalPriceOfOffers += groupDiscountOffer.getBundlePrice();
         }
 
@@ -55,4 +56,5 @@ public class GroupDiscountOfferProcessor implements OfferProcessor {
         return itemsRemoved;
     }
 }
+
 

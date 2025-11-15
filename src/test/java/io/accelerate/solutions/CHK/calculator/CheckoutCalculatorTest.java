@@ -36,4 +36,3 @@ class CheckoutCalculatorTest {
         assertEquals(result, 195);
     }
 }
-

@@ -28,7 +28,7 @@ class GroupDiscountOfferProcessorTest {
 
         SpecialOfferResult result = processor.process(offer, basket);
 
-        assertEquals(result.getItemsProcessed().size(), 3);
+        assertEquals(3, result.getItemsProcessed().size());
         assertEquals(result.getItemsProcessed().get(ItemType.Z), 3L);
         assertEquals(result.getItemsProcessed().get(ItemType.S), 1L);
         assertEquals(result.getItemsProcessed().get(ItemType.X), 1L);

@@ -28,7 +28,7 @@ public class SpecialOfferProcessor {
                 .build();
     }
 
-    private static void removeItemsFromBasket(SpecialOffer offer, Map<ItemType, Long> itemsLeftInBasket) {
+    private void removeItemsFromBasket(SpecialOffer offer, Map<ItemType, Long> itemsLeftInBasket) {
         itemsLeftInBasket.put(offer.getItemType(), itemsLeftInBasket.get(offer.getItemType()) - offer.getTargetAmount());
     }
 

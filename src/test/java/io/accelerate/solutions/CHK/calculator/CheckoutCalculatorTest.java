@@ -1,27 +1,39 @@
 package io.accelerate.solutions.CHK.calculator;
 
 import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferProcessor;
+import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferResult;
 import io.accelerate.solutions.CHK.model.Basket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyDouble;
+import static org.mockito.Mockito.when;
 
 class CheckoutCalculatorTest {
 
     private CheckoutCalculator checkoutCalculator;
+    private SpecialOfferProcessor processor;
 
     @BeforeEach
     void setUp() {
-        SpecialOfferProcessor processor = Mockito.mock(SpecialOfferProcessor.class);
+        processor = Mockito.mock(SpecialOfferProcessor.class);
         checkoutCalculator = new CheckoutCalculator(processor);
     }
 
     @Test
     void calculateTotalPrice() {
+        when(processor.process(any(), any())).thenReturn(SpecialOfferResult.builder()
+                .totalPriceApplied(0)
+                .itemsProcessed(Map.of())
+                .build());
+
         Integer result = checkoutCalculator.calculateTotalPrice(Basket.fromSkus("AABBCD"));
 
-        assertEquals(result, 165);
+        assertEquals(result, 180);
     }
 }

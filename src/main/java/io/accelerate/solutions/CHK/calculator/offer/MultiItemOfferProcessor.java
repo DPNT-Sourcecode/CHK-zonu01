@@ -26,5 +26,3 @@ public class MultiItemOfferProcessor implements OfferProcessor {
                 .build();
     }
 }
-
-

@@ -3,12 +3,14 @@ package io.accelerate.solutions.CHK.model.offer;
 import io.accelerate.solutions.CHK.model.ItemType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.util.Map;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
+@EqualsAndHashCode
 public class MultiItemOffer implements SpecialOffer {
 
     private final Map<ItemType, Long> targetProducts;
@@ -41,5 +43,3 @@ public class MultiItemOffer implements SpecialOffer {
         return originalPrice - offerBundle.totalPrice();
     }
 }
-
-

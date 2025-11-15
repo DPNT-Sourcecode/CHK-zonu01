@@ -3,6 +3,8 @@ package io.accelerate.solutions.CHK.calculator;
 import io.accelerate.solutions.CHK.calculator.offer.MultiItemOfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferResult;
 import io.accelerate.solutions.CHK.model.Basket;
+import io.accelerate.solutions.CHK.model.ItemType;
+import io.accelerate.solutions.CHK.model.offer.MultiItemOffer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -26,12 +28,14 @@ class CheckoutCalculatorTest {
 
     @Test
     void calculateTotalPriceWithoutOffers() {
-        when(processor.process(any(), any())).thenReturn(SpecialOfferResult.builder()
+        when(processor.process(
+                MultiItemOffer.of(ItemType.A, 3, 130), Basket.fromSkus("AACDEE")
+        )).thenReturn(SpecialOfferResult.builder()
                 .totalPriceApplied(0)
-                .itemsProcessed(Map.of())
+                .itemsProcessed(Map.of(ItemType.B, 1L))
                 .build());
 
-        Integer result = checkoutCalculator.calculateTotalPrice(Basket.fromSkus("AABBCD"));
+        Integer result = checkoutCalculator.calculateTotalPrice(Basket.fromSkus("AACDEE"));
 
         assertEquals(result, 195);
     }

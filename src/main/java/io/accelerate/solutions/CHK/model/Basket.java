@@ -66,4 +66,3 @@ public class Basket {
         return items.get(ItemType.INVALID) != null;
     }
 }
-

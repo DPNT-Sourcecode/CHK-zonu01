@@ -22,7 +22,7 @@ public class CheckoutCalculator {
         );
     }
 
-    private static final List<SpecialOffer> specialOffers = new ArrayList<>(List.of(
+    static final List<SpecialOffer> specialOffers = new ArrayList<>(List.of(
             MultiItemOffer.of(ItemType.A, 3, 130),
             MultiItemOffer.of(ItemType.A, 5, 200),
             MultiItemOffer.of(ItemType.B, 2, 45),
@@ -51,5 +51,3 @@ public class CheckoutCalculator {
         return totalPrice;
     }
 }
-
-

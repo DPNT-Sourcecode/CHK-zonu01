@@ -25,4 +25,3 @@ public enum ItemType {
                 .findFirst().orElse(INVALID);
     }
 }
-

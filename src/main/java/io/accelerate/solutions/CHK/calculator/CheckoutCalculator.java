@@ -1,10 +1,11 @@
 package io.accelerate.solutions.CHK.calculator;
 
-import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferProcessor;
+import io.accelerate.solutions.CHK.calculator.offer.SimpleOfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferResult;
 import io.accelerate.solutions.CHK.model.Basket;
 import io.accelerate.solutions.CHK.model.ItemType;
-import io.accelerate.solutions.CHK.model.SpecialOffer;
+import io.accelerate.solutions.CHK.model.offer.SimpleOffer;
+import io.accelerate.solutions.CHK.model.offer.SpecialOffer;
 import lombok.AllArgsConstructor;
 
 import java.util.*;
@@ -12,11 +13,13 @@ import java.util.*;
 @AllArgsConstructor
 public class CheckoutCalculator {
 
-    private SpecialOfferProcessor offerProcessor;
+    private Map<Class, >
+    private SimpleOfferProcessor simpleOfferProcessor;
 
     private static final List<SpecialOffer> specialOffers = new ArrayList<>(List.of(
-        SpecialOffer.of(ItemType.A, 3, 130),
-        SpecialOffer.of(ItemType.B, 2, 45)
+        SimpleOffer.of(ItemType.A, 3, 130),
+        SimpleOffer.of(ItemType.A, 5, 200),
+        SimpleOffer.of(ItemType.B, 2, 45)
     ));
 
     static {
@@ -28,7 +31,7 @@ public class CheckoutCalculator {
         int totalPrice = 0;
 
         for (SpecialOffer offer : specialOffers) {
-            SpecialOfferResult specialOfferResult = offerProcessor.process(offer, itemsInBasket);
+            SpecialOfferResult specialOfferResult = simpleOfferProcessor.process(offer, itemsInBasket);
             removeItemsFromBasket(itemsInBasket, specialOfferResult.getItemsProcessed());
             totalPrice += specialOfferResult.getTotalPriceApplied();
         }
@@ -47,3 +50,4 @@ public class CheckoutCalculator {
     }
 
 }
+

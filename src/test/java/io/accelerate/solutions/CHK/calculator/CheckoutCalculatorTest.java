@@ -1,6 +1,6 @@
 package io.accelerate.solutions.CHK.calculator;
 
-import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferProcessor;
+import io.accelerate.solutions.CHK.calculator.offer.SimpleOfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferResult;
 import io.accelerate.solutions.CHK.model.Basket;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,11 +16,11 @@ import static org.mockito.Mockito.when;
 class CheckoutCalculatorTest {
 
     private CheckoutCalculator checkoutCalculator;
-    private SpecialOfferProcessor processor;
+    private SimpleOfferProcessor processor;
 
     @BeforeEach
     void setUp() {
-        processor = Mockito.mock(SpecialOfferProcessor.class);
+        processor = Mockito.mock(SimpleOfferProcessor.class);
         checkoutCalculator = new CheckoutCalculator(processor);
     }
 
@@ -36,3 +36,4 @@ class CheckoutCalculatorTest {
         assertEquals(result, 195);
     }
 }
+

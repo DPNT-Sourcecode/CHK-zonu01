@@ -1,14 +1,14 @@
 package io.accelerate.solutions.CHK.calculator.offer;
 
 import io.accelerate.solutions.CHK.model.ItemType;
-import io.accelerate.solutions.CHK.model.SpecialOffer;
+import io.accelerate.solutions.CHK.model.offer.SimpleOffer;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SpecialOfferProcessor {
+public class SimpleOfferProcessor {
 
-    public SpecialOfferResult process(SpecialOffer offer, Map<ItemType, Long> itemsInBasket) {
+    public SpecialOfferResult process(SimpleOffer offer, Map<ItemType, Long> itemsInBasket) {
 
         Map<ItemType, Long> itemsLeftInBasket = new HashMap<>(itemsInBasket);
         Map<ItemType, Long> itemsProcessedForOffers = new HashMap<>();
@@ -28,11 +28,11 @@ public class SpecialOfferProcessor {
                 .build();
     }
 
-    private void removeItemsFromBasket(SpecialOffer offer, Map<ItemType, Long> itemsLeftInBasket) {
+    private void removeItemsFromBasket(SimpleOffer offer, Map<ItemType, Long> itemsLeftInBasket) {
         itemsLeftInBasket.put(offer.getItemType(), itemsLeftInBasket.get(offer.getItemType()) - offer.getTargetAmount());
     }
 
-    private boolean basketContainsItemsForOffer(Map<ItemType, Long> itemsInBasket, SpecialOffer offer) {
+    private boolean basketContainsItemsForOffer(Map<ItemType, Long> itemsInBasket, SimpleOffer offer) {
         Long actualAmount = itemsInBasket.get(offer.getItemType());
         return actualAmount != null && actualAmount >= offer.getTargetAmount();
     }

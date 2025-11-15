@@ -12,7 +12,11 @@ public class SumSolution {
      *  @return = an integer representing the sum of the two numbers
      */
     public int compute(int x, int y) {
+        if (x < 0 || x > 100 || y < 0 || y > 100) {
+            throw new IllegalArgumentException("Invalid argument. Either argument must be a positive integer between 0-100");
+        }
         return x + y;
     }
 
 }
+

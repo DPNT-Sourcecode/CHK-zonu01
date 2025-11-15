@@ -67,4 +67,3 @@ public class CheckoutCalculator {
         return totalPrice;
     }
 }
-

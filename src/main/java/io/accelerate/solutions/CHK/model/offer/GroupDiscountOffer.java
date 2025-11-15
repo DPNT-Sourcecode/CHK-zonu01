@@ -30,4 +30,3 @@ public class GroupDiscountOffer implements SpecialOffer {
                 .mapToInt(ItemType::getBasePrice).average().orElse(0);
     }
 }
-

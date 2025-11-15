@@ -5,11 +5,12 @@ import io.accelerate.solutions.CHK.calculator.offer.OfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferResult;
 import io.accelerate.solutions.CHK.model.Basket;
 import io.accelerate.solutions.CHK.model.ItemType;
-import io.accelerate.solutions.CHK.model.offer.MultiItemOffer;
-import io.accelerate.solutions.CHK.model.offer.SpecialOffer;
+import io.accelerate.solutions.CHK.model.offer.*;
 import lombok.AllArgsConstructor;
 
 import java.util.*;
+
+import static io.accelerate.solutions.CHK.model.ItemType.*;
 
 @AllArgsConstructor
 public class CheckoutCalculator {
@@ -37,7 +38,8 @@ public class CheckoutCalculator {
             MultiItemOffer.of(Map.of(ItemType.R, 3L), Map.of(ItemType.Q, 1L), 0),
             MultiItemOffer.of(ItemType.U, 4, 120),
             MultiItemOffer.of(ItemType.V, 2, 90),
-            MultiItemOffer.of(ItemType.V, 3, 130)
+            MultiItemOffer.of(ItemType.V, 3, 130),
+            GroupDiscountOffer.of(ItemGroup.of(Any.of(S, T, X, Y, Z), 5), 45)
     ));
 
     static {
@@ -62,3 +64,4 @@ public class CheckoutCalculator {
         return totalPrice;
     }
 }
+

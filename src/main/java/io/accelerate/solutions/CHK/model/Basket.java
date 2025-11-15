@@ -1,5 +1,6 @@
 package io.accelerate.solutions.CHK.model;
 
+import io.accelerate.solutions.CHK.model.offer.ItemGroup;
 import lombok.*;
 
 import java.util.HashMap;
@@ -46,6 +47,19 @@ public class Basket {
             }
         }
         return true;
+    }
+
+    public boolean contains(ItemGroup itemGroup) {
+        int count = 0;
+
+        for (ItemType itemType : itemGroup.getItemsInGroup()) {
+            count += this.items.getOrDefault(itemType, 0L);
+            if (count >= itemGroup.getTargetAmount()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void put(Map<ItemType, Long> itemsToAdd) {

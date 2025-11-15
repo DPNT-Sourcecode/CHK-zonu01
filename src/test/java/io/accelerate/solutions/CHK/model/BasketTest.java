@@ -1,5 +1,7 @@
 package io.accelerate.solutions.CHK.model;
 
+import io.accelerate.solutions.CHK.model.offer.Any;
+import io.accelerate.solutions.CHK.model.offer.ItemGroup;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -43,4 +45,21 @@ class BasketTest {
         assertTrue(result.contains(Map.of(ItemType.A, 2L, ItemType.B, 2L)));
     }
 
+    @Test
+    public void shouldReturnTrueIfContainsItemsInGroup() {
+        String skus = "ABCDEFFG";
+
+        Basket result = Basket.fromSkus(skus);
+
+        assertTrue(result.contains(ItemGroup.of(Any.of(ItemType.D, ItemType.E, ItemType.F), 4)));
+    }
+
+    @Test
+    public void shouldReturnFalseIfDoesNotContainItemsInGroup() {
+        String skus = "ABCDEFG";
+
+        Basket result = Basket.fromSkus(skus);
+
+        assertFalse(result.contains(ItemGroup.of(Any.of(ItemType.D, ItemType.E, ItemType.F), 4)));
+    }
 }

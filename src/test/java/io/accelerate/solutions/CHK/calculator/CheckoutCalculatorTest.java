@@ -1,5 +1,6 @@
 package io.accelerate.solutions.CHK.calculator;
 
+import io.accelerate.solutions.CHK.calculator.offer.GroupDiscountOfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.MultiItemOfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferResult;
 import io.accelerate.solutions.CHK.model.Basket;
@@ -17,17 +18,18 @@ import static org.mockito.Mockito.when;
 class CheckoutCalculatorTest {
 
     private CheckoutCalculator checkoutCalculator;
-    private MultiItemOfferProcessor processor;
+    private MultiItemOfferProcessor multiItemOfferProcessor;
+    private GroupDiscountOfferProcessor groupDiscountOfferProcessor;
 
     @BeforeEach
     void setUp() {
-        processor = Mockito.mock(MultiItemOfferProcessor.class);
-        checkoutCalculator = new CheckoutCalculator(processor);
+        multiItemOfferProcessor = Mockito.mock(MultiItemOfferProcessor.class);
+        checkoutCalculator = new CheckoutCalculator(multiItemOfferProcessor, groupDiscountOfferProcessor);
     }
 
     @Test
     void calculateTotalPriceWithOffers() {
-        when(processor.process(
+        when(multiItemOfferProcessor.process(
                 any(), any()
         )).thenReturn(SpecialOfferResult.builder()
                         .totalPriceApplied(0)
@@ -53,7 +55,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void calculateTotalPriceWithoutOffers() {
-        when(processor.process(
+        when(multiItemOfferProcessor.process(
                 any(), any()
         )).thenReturn(SpecialOfferResult.builder()
                         .totalPriceApplied(40)

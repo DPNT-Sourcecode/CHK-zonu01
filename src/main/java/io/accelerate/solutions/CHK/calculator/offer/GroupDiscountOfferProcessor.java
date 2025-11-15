@@ -10,17 +10,17 @@ public class GroupDiscountOfferProcessor implements OfferProcessor {
 
     @Override
     public SpecialOfferResult process(SpecialOffer offer, Basket basket) {
-        GroupDiscountOffer multiItemOffer = (GroupDiscountOffer) offer;
+        GroupDiscountOffer groupDiscountOffer = (GroupDiscountOffer) offer;
 
         Basket basketToProcess = basket.mutableCopy();
         Basket itemsProcessed = Basket.empty();
         int totalPriceOfOffers = 0;
 
-        // check if basket contains the target amount of any of group items
-        while (basketToProcess.contains(multiItemOffer.getItemGroup())) {
-//            basketToProcess.remove(multiItemOffer.getTargetProducts());
-//            itemsProcessed.put(multiItemOffer.getOfferBundle().itemsInBundle());
-            totalPriceOfOffers += multiItemOffer.getBundlePrice();
+        // check if basket contains the target amount of group items
+        while (basketToProcess.contains(groupDiscountOffer.getItemGroup())) {
+//            basketToProcess.remove(groupDiscountOffer.getTargetProducts());
+//            itemsProcessed.put(groupDiscountOffer.getOfferBundle().itemsInBundle());
+            totalPriceOfOffers += groupDiscountOffer.getBundlePrice();
         }
 
         return SpecialOfferResult.builder()

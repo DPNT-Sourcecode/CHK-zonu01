@@ -1,6 +1,7 @@
 package io.accelerate.solutions.CHK;
 
 import io.accelerate.solutions.CHK.calculator.CheckoutCalculator;
+import io.accelerate.solutions.CHK.calculator.offer.GroupDiscountOfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.MultiItemOfferProcessor;
 import io.accelerate.solutions.CHK.model.Basket;
 import io.accelerate.solutions.CHK.model.ItemType;
@@ -14,7 +15,8 @@ public class CheckoutSolution {
 
     public CheckoutSolution() {
         MultiItemOfferProcessor offerProcessor = new MultiItemOfferProcessor();
-        this.checkoutCalculator = new CheckoutCalculator(offerProcessor);
+        GroupDiscountOfferProcessor groupDiscountOfferProcessor = new GroupDiscountOfferProcessor();
+        this.checkoutCalculator = new CheckoutCalculator(offerProcessor, groupDiscountOfferProcessor);
     }
 
     public Integer checkout(String skus) {

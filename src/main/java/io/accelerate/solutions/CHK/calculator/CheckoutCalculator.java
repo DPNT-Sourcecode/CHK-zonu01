@@ -1,5 +1,6 @@
 package io.accelerate.solutions.CHK.calculator;
 
+import io.accelerate.solutions.CHK.calculator.offer.GroupDiscountOfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.MultiItemOfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.OfferProcessor;
 import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferResult;
@@ -17,9 +18,11 @@ public class CheckoutCalculator {
 
     private Map<String, OfferProcessor> processorMap;
 
-    public CheckoutCalculator(MultiItemOfferProcessor multiItemOfferProcessor) {
+    public CheckoutCalculator(MultiItemOfferProcessor multiItemOfferProcessor,
+                              GroupDiscountOfferProcessor groupDiscountOfferProcessor) {
         processorMap = Map.of(
-                MultiItemOffer.class.getSimpleName(), multiItemOfferProcessor
+                MultiItemOffer.class.getSimpleName(), multiItemOfferProcessor,
+                GroupDiscountOffer.class.getSimpleName(), groupDiscountOfferProcessor
         );
     }
 

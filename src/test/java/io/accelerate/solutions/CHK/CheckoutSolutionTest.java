@@ -16,9 +16,9 @@ class CheckoutSolutionTest {
 
     @Test
     public void shouldReturnPriceTotalOfBasket() {
-        Integer result = solution.checkout("ABCD");
+        Integer result = solution.checkout("AABCD");
 
-        assertEquals(result, 115);
+        assertEquals(result, 165);
     }
 
 

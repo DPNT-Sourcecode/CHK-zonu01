@@ -10,8 +10,12 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class CheckoutSolution {
     public Integer checkout(String skus) {
-        Map<ItemType, Integer> basket = skus.chars()
+        Map<Character, Long> basket = skus.chars()
+                .mapToObj(charInt -> (char) charInt)
                 .collect(groupingBy(Function.identity(), counting()));
+        System.out.println(basket);
+        return 0;
     }
 }
+
 

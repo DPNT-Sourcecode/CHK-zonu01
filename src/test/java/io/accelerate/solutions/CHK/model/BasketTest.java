@@ -35,6 +35,10 @@ class BasketTest {
         result.put(Map.of(ItemType.A, 2L));
 
         assertEquals(4, result.getItems().get(ItemType.A));
+
+        result.remove(Map.of(ItemType.A, 2L));
+
+        assertEquals(2, result.getItems().get(ItemType.A));
     }
 
 }

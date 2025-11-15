@@ -36,15 +36,15 @@ public class Basket {
         return new Basket(new HashMap<>(items));
     }
 
-    public void put(Map<ItemType, Long> items) {
-        for (Map.Entry<ItemType, Long> entry : items.entrySet()) {
-            items.merge(entry.getKey(), entry.getValue(), Long::sum);
+    public void put(Map<ItemType, Long> itemsToAdd) {
+        for (Map.Entry<ItemType, Long> itemToAdd : itemsToAdd.entrySet()) {
+            this.items.merge(itemToAdd.getKey(), itemToAdd.getValue(), Long::sum);
         }
     }
 
-    public void remove(Map<ItemType, Long> items) {
-        for (Map.Entry<ItemType, Long> entry : items.entrySet()) {
-            items.put(entry.getKey(), items.get(entry.getKey()) - entry.getValue());
+    public void remove(Map<ItemType, Long> itemsToRemove) {
+        for (Map.Entry<ItemType, Long> itemToRemove : itemsToRemove.entrySet()) {
+            items.put(itemToRemove.getKey(), items.get(itemToRemove.getKey()) - itemToRemove.getValue());
         }
     }
 

@@ -21,6 +21,22 @@ class MultiItemOfferProcessorTest {
     }
 
     @Test
+    void shouldProcessSingleItemsFromBasket() {
+        SpecialOffer offer = MultiItemOffer.of(
+                ItemType.C,
+                2L,
+                10
+        );
+        Basket basket = Basket.fromSkus("CCCDDD");
+
+        SpecialOfferResult result = processor.process(offer, basket);
+
+        assertEquals(result.getItemsProcessed().size(), 1);
+        assertEquals(result.getItemsProcessed().get(ItemType.C), 2L);
+        assertEquals(result.getTotalPriceApplied(), 10);
+    }
+
+    @Test
     void shouldProcessMultipleItemsFromBasket() {
         SpecialOffer offer = MultiItemOffer.of(
                 Map.of(ItemType.C, 2L),

@@ -31,24 +31,29 @@ class CheckoutCalculatorTest {
         when(processor.process(
                 any(), any()
         )).thenReturn(SpecialOfferResult.builder()
-                .totalPriceApplied(0)
-                .itemsProcessed(Map.of())
-                .build());
-        when(processor.process(
-                MultiItemOffer.of(Map.of(ItemType.E, 2L), Map.of(ItemType.B, 1L), 0), Basket.fromSkus("AAABCDEE")
-        )).thenReturn(SpecialOfferResult.builder()
-                .totalPriceApplied(0)
-                .itemsProcessed(Map.of(ItemType.B, 1L))
-                .build());
-        when(processor.process(
-                MultiItemOffer.of(ItemType.A, 3, 130), Basket.fromSkus("AAACDEE")
-        )).thenReturn(SpecialOfferResult.builder()
-                .totalPriceApplied(130)
-                .itemsProcessed(Map.of(ItemType.A, 3L))
-                .build());
+                        .totalPriceApplied(0)
+                        .itemsProcessed(Map.of())
+                        .build())
+                .thenReturn(SpecialOfferResult.builder()
+                        .totalPriceApplied(0)
+                        .itemsProcessed(Map.of(ItemType.B, 1L))
+                        .build())
+                .thenReturn(SpecialOfferResult.builder()
+                        .totalPriceApplied(130)
+                        .itemsProcessed(Map.of(ItemType.A, 3L))
+                        .build())
+                .thenReturn(SpecialOfferResult.builder()
+                        .totalPriceApplied(0)
+                        .itemsProcessed(Map.of())
+                        .build())
+                .thenReturn(SpecialOfferResult.builder()
+                        .totalPriceApplied(0)
+                        .itemsProcessed(Map.of())
+                        .build());
 
         Integer result = checkoutCalculator.calculateTotalPrice(Basket.fromSkus("AAABCDEE"));
 
         assertEquals(205, result);
     }
 }
+

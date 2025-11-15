@@ -2,6 +2,8 @@ package io.accelerate.solutions.CHK.model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BasketTest {
@@ -23,6 +25,16 @@ class BasketTest {
         Basket basket = Basket.fromSkus("ASDF.");
 
         assertTrue(basket.includesInvalidItems());
+    }
+
+    @Test
+    public void shouldCreateAMutableCopy() {
+        String skus = "ABCDAB";
+
+        Basket result = Basket.fromSkus(skus).mutableCopy();
+        result.put(Map.of(ItemType.A, 2L));
+
+        assertEquals(4, result.getItems().get(ItemType.A));
     }
 
 }

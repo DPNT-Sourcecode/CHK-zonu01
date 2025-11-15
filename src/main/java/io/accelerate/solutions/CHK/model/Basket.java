@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -29,6 +30,22 @@ public class Basket {
                 .map(ItemType::fromSku)
                 .collect(groupingBy(Function.identity(), counting()));
         return new Basket(basketItems);
+    }
+
+    public Basket mutableCopy() {
+        return new Basket(new HashMap<>(items));
+    }
+
+    public void put(Map<ItemType, Long> items) {
+        for (Map.Entry<ItemType, Long> entry : items.entrySet()) {
+            items.merge(entry.getKey(), entry.getValue(), Long::sum);
+        }
+    }
+
+    public void remove(Map<ItemType, Long> items) {
+        for (Map.Entry<ItemType, Long> entry : items.entrySet()) {
+            items.put(entry.getKey(), items.get(entry.getKey()) - entry.getValue());
+        }
     }
 
     public boolean includesInvalidItems() {

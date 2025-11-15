@@ -12,9 +12,17 @@ class BasketTest {
 
         Basket result = Basket.fromSkus(skus);
 
+        assertFalse(result.includesInvalidItems());
         assertEquals(2, result.getItems().get(ItemType.A));
         assertEquals(2, result.getItems().get(ItemType.B));
         assertEquals(1, result.getItems().get(ItemType.C));
+    }
+
+    @Test
+    public void shouldReturnTrueWhenItContainsInvalidCharacters() {
+        Basket basket = Basket.fromSkus("ASDF.");
+
+        assertTrue(basket.includesInvalidItems());
     }
 
 }

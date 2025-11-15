@@ -9,6 +9,8 @@ import io.accelerate.solutions.CHK.model.offer.SpecialOffer;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class GroupDiscountOfferProcessor implements OfferProcessor {
 
@@ -40,10 +42,11 @@ public class GroupDiscountOfferProcessor implements OfferProcessor {
         for (ItemType itemType : itemGroup.getItemsInGroup()) {
             Long amountOfCurrentType = basket.getItems().get(itemType);
             if (amountOfCurrentType != null && amountOfCurrentType > 0) {
-                long processedAmount = Math.min(
+                long processedAmount = LongStream.of(
                         itemGroup.getTargetAmount() - amountOfCurrentType,
-                        itemGroup.getTargetAmount() - count
-                );
+                        itemGroup.getTargetAmount() - count,
+                        amountOfCurrentType
+                ).min().orElse(0);
                 count += processedAmount;
                 itemsRemoved.put(itemType,processedAmount);
                 basket.remove(Map.of(itemType, processedAmount));
@@ -56,5 +59,6 @@ public class GroupDiscountOfferProcessor implements OfferProcessor {
         return itemsRemoved;
     }
 }
+
 
 

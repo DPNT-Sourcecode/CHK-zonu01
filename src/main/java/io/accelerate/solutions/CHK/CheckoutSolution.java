@@ -1,6 +1,7 @@
 package io.accelerate.solutions.CHK;
 
 import io.accelerate.solutions.CHK.calculator.CheckoutCalculator;
+import io.accelerate.solutions.CHK.calculator.offer.SpecialOfferProcessor;
 import io.accelerate.solutions.CHK.model.Basket;
 import io.accelerate.solutions.CHK.model.ItemType;
 import lombok.AccessLevel;
@@ -10,6 +11,11 @@ import lombok.Setter;
 public class CheckoutSolution {
 
     private CheckoutCalculator checkoutCalculator;
+
+    public CheckoutSolution() {
+        SpecialOfferProcessor offerProcessor = new SpecialOfferProcessor();
+        this.checkoutCalculator = new CheckoutCalculator(offerProcessor);
+    }
 
     public Integer checkout(String skus) {
         Basket basket = Basket.fromSkus(skus);
@@ -22,4 +28,5 @@ public class CheckoutSolution {
     }
 
 }
+
 

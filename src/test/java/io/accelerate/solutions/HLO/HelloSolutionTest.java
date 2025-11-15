@@ -18,6 +18,6 @@ class HelloSolutionTest {
     public void shouldSayHelloToTheWorld() {
         String result = hello.hello("mellon");
 
-        assertEquals("Hello, world", result);
+        assertEquals("Hello, World!", result);
     }
 }

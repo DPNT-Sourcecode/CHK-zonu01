@@ -29,13 +29,19 @@ class CheckoutCalculatorTest {
     @Test
     void calculateTotalPriceWithoutOffers() {
         when(processor.process(
-                MultiItemOffer.of(ItemType.A, 3, 130), Basket.fromSkus("AACDEE")
+                any(), any()
+        )).thenReturn(SpecialOfferResult.builder()
+                .totalPriceApplied(0)
+                .itemsProcessed(Map.of())
+                .build());
+        when(processor.process(
+                MultiItemOffer.of(ItemType.A, 3, 130), Basket.fromSkus("AABCDEE")
         )).thenReturn(SpecialOfferResult.builder()
                 .totalPriceApplied(0)
                 .itemsProcessed(Map.of(ItemType.B, 1L))
                 .build());
 
-        Integer result = checkoutCalculator.calculateTotalPrice(Basket.fromSkus("AACDEE"));
+        Integer result = checkoutCalculator.calculateTotalPrice(Basket.fromSkus("AABCDEE"));
 
         assertEquals(result, 195);
     }

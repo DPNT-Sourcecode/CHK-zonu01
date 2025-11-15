@@ -14,7 +14,9 @@ public class MultiItemOfferProcessor implements OfferProcessor {
         Basket itemsProcessed = Basket.empty();
         int totalPriceOfOffers = 0;
 
-        while (basketToProcess.contains(multiItemOffer.getTargetProducts())) {
+        // check if basket contains both the target items and the items to which to apply the promotion to
+        while (basketToProcess.contains(multiItemOffer.getTargetProducts())
+                && basketToProcess.contains(multiItemOffer.getOfferBundle().itemsInBundle())) {
             basketToProcess.remove(multiItemOffer.getTargetProducts());
             itemsProcessed.put(multiItemOffer.getOfferBundle().itemsInBundle());
             totalPriceOfOffers += multiItemOffer.getBundlePrice();
@@ -26,3 +28,4 @@ public class MultiItemOfferProcessor implements OfferProcessor {
                 .build();
     }
 }
+

@@ -15,6 +15,7 @@ public enum ItemType {
     C(20),
     D(15),
     E(40),
+    F(10),
     INVALID(-1);
 
     private final int basePrice;

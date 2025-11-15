@@ -27,7 +27,7 @@ class CheckoutCalculatorTest {
     }
 
     @Test
-    void calculateTotalPriceWithoutOffers() {
+    void calculateTotalPriceWithOffers() {
         when(processor.process(
                 any(), any()
         )).thenReturn(SpecialOfferResult.builder()
@@ -51,5 +51,22 @@ class CheckoutCalculatorTest {
 
         assertEquals(245, result);
     }
-}
 
+    @Test
+    void calculateTotalPriceWithoutOffers() {
+        when(processor.process(
+                any(), any()
+        )).thenReturn(SpecialOfferResult.builder()
+                        .totalPriceApplied(40)
+                        .itemsProcessed(Map.of(ItemType.F, 6L))
+                        .build())
+                .thenReturn(SpecialOfferResult.builder()
+                        .totalPriceApplied(0)
+                        .itemsProcessed(Map.of())
+                        .build());
+
+        Integer result = checkoutCalculator.calculateTotalPrice(Basket.fromSkus("FFFFFF"));
+
+        assertEquals(245, result);
+    }
+}

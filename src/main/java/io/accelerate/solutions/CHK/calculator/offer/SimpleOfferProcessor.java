@@ -40,4 +40,3 @@ public class SimpleOfferProcessor implements OfferProcessor {
         return actualAmount != null && actualAmount >= offer.getTargetAmount();
     }
 }
-

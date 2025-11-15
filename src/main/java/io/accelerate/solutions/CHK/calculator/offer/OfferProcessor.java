@@ -9,4 +9,3 @@ import java.util.Map;
 public interface OfferProcessor {
     SpecialOfferResult process(SpecialOffer offer, Map<ItemType, Long> itemsInBasket);
 }
-

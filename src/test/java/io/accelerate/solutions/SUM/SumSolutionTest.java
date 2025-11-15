@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SumSolutionTest {
     private SumSolution sum;
@@ -22,7 +23,10 @@ public class SumSolutionTest {
 
     @Test
     public void shouldThrowIllegalArgumentExceptionWhenArgsOutOfBounds() {
-        ;
+        assertThrows(IllegalArgumentException.class, () -> {
+           sum.compute(-1, 50);
+        });
     }
 }
+
 

@@ -24,7 +24,15 @@ class CheckoutCalculatorTest {
     @BeforeEach
     void setUp() {
         multiItemOfferProcessor = Mockito.mock(MultiItemOfferProcessor.class);
+        groupDiscountOfferProcessor = Mockito.mock(GroupDiscountOfferProcessor.class);
         checkoutCalculator = new CheckoutCalculator(multiItemOfferProcessor, groupDiscountOfferProcessor);
+
+        when(groupDiscountOfferProcessor.process(
+                any(), any()
+        )).thenReturn(SpecialOfferResult.builder()
+                .totalPriceApplied(0)
+                .itemsProcessed(Map.of())
+                .build());
     }
 
     @Test

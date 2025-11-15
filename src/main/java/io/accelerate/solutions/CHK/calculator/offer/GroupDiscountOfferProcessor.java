@@ -17,11 +17,11 @@ public class GroupDiscountOfferProcessor implements OfferProcessor {
         int totalPriceOfOffers = 0;
 
         // check if basket contains the target amount of group items
-        while (basketToProcess.contains(groupDiscountOffer.getItemGroup())) {
-//            basketToProcess.remove(groupDiscountOffer.getTargetProducts());
-//            itemsProcessed.put(groupDiscountOffer.getOfferBundle().itemsInBundle());
-            totalPriceOfOffers += groupDiscountOffer.getBundlePrice();
-        }
+//        while (basketToProcess.contains(groupDiscountOffer.getItemGroup())) {
+////            basketToProcess.remove(groupDiscountOffer.getTargetProducts());
+////            itemsProcessed.put(groupDiscountOffer.getOfferBundle().itemsInBundle());
+//            totalPriceOfOffers += groupDiscountOffer.getBundlePrice();
+//        }
 
         return SpecialOfferResult.builder()
                 .itemsProcessed(itemsProcessed.getItems())
@@ -29,3 +29,4 @@ public class GroupDiscountOfferProcessor implements OfferProcessor {
                 .build();
     }
 }
+

@@ -30,6 +30,6 @@ public class SpecialOfferProcessorTest {
         SpecialOfferResult result = processor.process(specialOffer, itemsInBasket);
 
         assertEquals(result.getItemsProcessed(), Map.of(ItemType.A, 6L));
-        assertEquals(result.getTotalPriceApplied(), 130);
+        assertEquals(result.getTotalPriceApplied(), 260);
     }
 }

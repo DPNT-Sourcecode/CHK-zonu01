@@ -25,7 +25,8 @@ public class CheckoutCalculator {
     private static final List<SpecialOffer> specialOffers = new ArrayList<>(List.of(
             MultiItemOffer.of(ItemType.A, 3, 130),
             MultiItemOffer.of(ItemType.A, 5, 200),
-            MultiItemOffer.of(ItemType.B, 2, 45)
+            MultiItemOffer.of(ItemType.B, 2, 45),
+            MultiItemOffer.of(Map.of(ItemType.E, 2L), Map.of(ItemType.B, 1L), 0)
     ));
 
     static {
@@ -50,4 +51,5 @@ public class CheckoutCalculator {
         return totalPrice;
     }
 }
+
 

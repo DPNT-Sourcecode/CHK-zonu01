@@ -14,6 +14,7 @@ public enum ItemType {
     B(30),
     C(20),
     D(15),
+    E(40),
     INVALID(-1);
 
     private final int basePrice;
@@ -24,3 +25,4 @@ public enum ItemType {
                 .findFirst().orElse(INVALID);
     }
 }
+
